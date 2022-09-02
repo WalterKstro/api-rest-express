@@ -1,13 +1,9 @@
+Execute 
 ```
-node app
-```
-
-Optional install [nodemon](https://www.npmjs.com/package/nodemon)
+npm run dev
 
 ```
-nodemon app
-```
-Optional Rename file
+Optional rename file
 ```
 .env.test.local -> .env
 ```

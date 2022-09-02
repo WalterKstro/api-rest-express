@@ -4,11 +4,13 @@ const path = require('path');
 const cors = require('cors')
 
 const router = require('../routes/user.routes');
+const { connection } = require('../database/config.database');
 
 class Server {
     constructor() {
         this.app = express()
         this.port = process.env.PORT
+        this.connect()
         this.middlewares()
         this.listen()
     }
@@ -19,10 +21,13 @@ class Server {
         })
     }
 
+    connect() {
+        connection()
+    }
     middlewares() {
         this.app.use(cors())
         this.app.use(express.json())
-        this.app.use('/api',router)
+        this.app.use('/api', router)
         this.app.use(express.static(path.join(__dirname, '../public')));
     }
 }
