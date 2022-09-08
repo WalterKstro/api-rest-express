@@ -3,9 +3,9 @@ const { check } = require('express-validator');
 const { checkErrors } = require('../middleware/validations.middleware');
 const { Router } = require('express');
 const router = Router();
-const validateEmail = require('../utils/validate.email');
-const existMongoId = require('../utils/validate.mongo.id');
-const validateRole = require('../utils/validate.role');
+const validateEmail = require('../validations/validate.email');
+const existMongoId = require('../validations/validate.mongo.id');
+const validateRole = require('../validations/validate.role');
 
 router.get('/', [
     check('limit', 'Query param cannot a string').isInt().optional(),

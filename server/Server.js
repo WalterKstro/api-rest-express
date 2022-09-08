@@ -4,6 +4,8 @@ const path = require('path');
 const cors = require('cors')
 
 const router = require('../routes/user.routes');
+const authentication = require('../routes/auth.routes');
+
 const { connection } = require('../database/config.database');
 
 class Server {
@@ -27,6 +29,7 @@ class Server {
     middlewares() {
         this.app.use(cors())
         this.app.use(express.json())
+        this.app.use('/auth',authentication)
         this.app.use('/api', router)
         this.app.use(express.static(path.join(__dirname, '../public')));
     }
