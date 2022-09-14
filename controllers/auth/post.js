@@ -19,7 +19,10 @@ const post = async (req = request, resp = response) => {
 
         const token = await generateJwt(findUserByEmail.id)
 
-        resp.json(token)
+        resp.json({
+            user: findUserByEmail,
+            ...token
+        })
 
     } catch(e) {
         resp.status(400).json({

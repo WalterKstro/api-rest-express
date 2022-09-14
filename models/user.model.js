@@ -21,8 +21,8 @@ const schemaUser = new Schema({
 })
 
 schemaUser.methods.toJSON = function() {
-    const { __v, ...rest } = this.toObject();
-    return rest;
+    const { __v, _id, ...rest } = this.toObject();
+    return {...rest, uid:_id};
 }
 const User = model('User', schemaUser)
 

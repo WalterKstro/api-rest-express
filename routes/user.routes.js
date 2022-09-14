@@ -1,8 +1,11 @@
-const { callbackGet, callbackDelete, callbackPost, callbackPut } = require('../controllers/users.controller');
 const { check } = require('express-validator');
-const { checkErrors } = require('../middleware/validations.middleware');
 const { Router } = require('express');
 const router = Router();
+
+const { callbackGet, callbackDelete, callbackPost, callbackPut } = require('../controllers/users.controller');
+const checkErrors = require('../middleware/validations.middleware');
+const isAuthenticationByToken = require('../middleware/authentication.middleware');
+const isRoot = require('../middleware/isRoot');
 const validateEmail = require('../validations/validate.email');
 const existMongoId = require('../validations/validate.mongo.id');
 const validateRole = require('../validations/validate.role');
@@ -36,7 +39,10 @@ router.put('/:id',
     callbackPut
 );
 
-router.delete('/:id', [
+router.delete('/:id', 
+    [
+    isAuthenticationByToken,
+    isRoot,
     check('id', "Mongo's id isn't valid").isMongoId(),
     check('id').custom(existMongoId),
     checkErrors
