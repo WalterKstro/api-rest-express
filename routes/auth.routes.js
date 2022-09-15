@@ -1,9 +1,9 @@
 const {Router} = require('express')
 const { check } = require('express-validator');
 const authentication = new Router();
-const { callbackAuthPost } = require('../controllers/auth.controller');
-const checkErrors = require('../middleware/validations.middleware');
-const isActiveUsername = require('../middleware/isActive.middleware');
+
+const { callbackAuthPost } = require('../controllers');
+const { isActiveUsername,checkErrors } = require('../middleware');
 
 authentication.post('/',[
 		isActiveUsername,
@@ -11,6 +11,7 @@ authentication.post('/',[
 		check('password','Password is required').not().isEmpty(),
 		checkErrors
 	],
-	callbackAuthPost)
+	callbackAuthPost
+)
 
 module.exports = authentication

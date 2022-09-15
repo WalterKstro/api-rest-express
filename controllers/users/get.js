@@ -1,4 +1,4 @@
-const User = require("../../models/user.model")
+const { User } = require("../../models")
 
 const get = async (req = request, res = response) => {
     const { limit = 5, from = 0 } = req.query

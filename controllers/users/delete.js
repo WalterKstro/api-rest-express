@@ -1,17 +1,16 @@
-const { request, response } = require('express');
-const User = require('../../models/user.model');
+const { User } = require('../../models');
 
-const remove = async (req = request, res = response) => {
+const remove = async ( req,res ) => {
     const { id } = req.params;
-    const { role,...rest } = req.userAuthenticated
-    if( role == 'ROOT' ){
+
+    try {
         const updated = await User.findOneAndUpdate({_id:id},{state:false},{returnDocument:'after' })
         res.json({
             user: updated
         })
-    }else {
+    } catch(e) {
         res.status(401).json({
-            user: 'Role Unauthorized'
+            status: e.message 
         })
     }
 }

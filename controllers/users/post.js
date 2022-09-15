@@ -1,4 +1,4 @@
-const User = require("../../models/user.model");
+const { User } = require("../../models");
 const encript = require("../../utils/bcrypt");
 
 const post = async (req = request, res = response) => {
